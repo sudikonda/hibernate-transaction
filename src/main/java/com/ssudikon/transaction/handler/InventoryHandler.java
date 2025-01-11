@@ -14,6 +14,11 @@ public class InventoryHandler {
     }
 
     public Product updateProduct(Product product) {
+        // simulate database error
+        if (Math.random() < 0.5) {
+            throw new RuntimeException("Database error");
+        }
+
         return inventoryRepository.save(product);
     }
 

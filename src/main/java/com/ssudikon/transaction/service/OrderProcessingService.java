@@ -6,6 +6,9 @@ import com.ssudikon.transaction.handler.InventoryHandler;
 import com.ssudikon.transaction.handler.OrderHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -19,6 +22,7 @@ public class OrderProcessingService {
         this.orderHandler = orderHandler;
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
     public Order processOrder(Order order) {
         log.info("Processing order: {}", order);
         Long productId = order.getProductId();

@@ -14,6 +14,10 @@ public class OrderHandler {
     }
 
     public Order saveOrder(Order order) {
+        // simulate database error
+        if (Math.random() < 0.5) {
+            throw new RuntimeException("Database error");
+        }
         return orderRepository.save(order);
     }
 }
